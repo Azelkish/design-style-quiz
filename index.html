@@ -1,0 +1,89 @@
+
+<!-- Design Style Quiz Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find your interior design style with our quick quiz – discover if you're more Contemporary, Modern, or Minimalist!">
+  <title>Find Your Design Style | Feel Design</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
+    .container { max-width: 720px; margin: auto; padding: 40px 20px; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,0.05); border-radius: 16px; margin-top: 60px; }
+    h1 { font-size: 28px; margin-bottom: 10px; text-align: center; }
+    p.subtitle { text-align: center; font-size: 16px; color: #666; margin-bottom: 30px; }
+    .question { margin-bottom: 30px; }
+    .question h3 { font-size: 18px; margin-bottom: 10px; }
+    .options label { display: block; margin-bottom: 8px; cursor: pointer; }
+    button { background: #0073aa; color: #fff; padding: 12px 24px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; }
+    button:hover { background: #005f8a; }
+    .result { display: none; margin-top: 40px; background: #e6f2f8; padding: 20px; border-radius: 12px; text-align: center; font-size: 18px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎯 Find Your Design Style</h1>
+    <p class="subtitle">Answer a few quick questions to discover your true interior style personality.</p>
+
+    <form id="quizForm">
+      <div class="question">
+        <h3>1. Your ideal home vibe is:</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="Contemporary"> Sleek, tech-integrated, adaptable</label>
+          <label><input type="radio" name="q1" value="Modern"> Clean lines, structured, retro charm</label>
+          <label><input type="radio" name="q1" value="Minimalist"> Calm, clutter-free, serene</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>2. Your favorite materials include:</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="Minimalist"> Soft textures, light wood, neutral tones</label>
+          <label><input type="radio" name="q2" value="Modern"> Glass, metal, mid-century furniture</label>
+          <label><input type="radio" name="q2" value="Contemporary"> Smart materials, natural stone, layered lighting</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>3. You care most about:</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="Contemporary"> Innovation + sustainability</label>
+          <label><input type="radio" name="q3" value="Modern"> Nostalgia + structure</label>
+          <label><input type="radio" name="q3" value="Minimalist"> Peace + intentionality</label>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button type="button" onclick="showResult()">🔍 See My Style</button>
+      </div>
+
+      <div id="resultBox" class="result"></div>
+    </form>
+  </div>
+
+  <script>
+    function showResult() {
+      const form = document.forms['quizForm'];
+      const answers = [form.q1.value, form.q2.value, form.q3.value];
+
+      if (answers.includes("")) {
+        alert("Please answer all questions.");
+        return;
+      }
+
+      const score = answers.reduce((acc, val) => {
+        acc[val] = (acc[val] || 0) + 1;
+        return acc;
+      }, {});
+
+      const finalStyle = Object.entries(score).sort((a,b) => b[1] - a[1])[0][0];
+
+      const resultBox = document.getElementById('resultBox');
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `🎉 You're <strong>${finalStyle}</strong> style!`;
+    }
+  </script>
+
+</body>
+</html>
